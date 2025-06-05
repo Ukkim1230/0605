@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.shop.mapper.PointInfoMapper">
+	<select id="selectPointInfoList" resultType="com.test.shop.vo.PointInfoVO">
+		SELECT * FROM POINT_INFO
+	</select>
+	<select id="selectPointInfo" resultType="com.test.shop.vo.PointInfoVO">
+		SELECT * FROM POINT_INFO
+		WHERE PI_NUM = #{piNum}
+	</select>
+
+	<insert id="insertPointInfo">
+		INSERT INTO POINT_INFO (PT_TYPE, UI_NUM)
+		VALUES
+		(#{ptType}, #{uiNum})
+	</insert>
+
+	<update id="updatePointInfo">
+		UPDATE POINT_INFO
+		SET PT_TYPE = #{ptType},
+		UI_NUM =
+		#{uiNum}
+		WHERE PI_NUM = #{piNum}
+	</update>
+
+	<delete id="deletePointInfo">
+		DELETE FROM POINT_INFO
+		WHERE PI_NUM = #{piNum}
+	</delete>
+</mapper>

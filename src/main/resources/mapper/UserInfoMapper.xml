@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.shop.mapper.UserInfoMapper">
+
+	<select id="selectUserInfoList"
+		resultType="com.test.shop.vo.UserInfoVO">
+		SELECT UI.UI_NUM, UI.UI_NAME, UI.UI_ID, UI.UI_PROFILE_IMG, UI.UG_NUM,
+		UG.UG_NAME, UG.UG_DESC,
+		UI.CREDAT, UI.CRETIM, UI.LMODAT, UI.LMOTIM
+		FROM USER_INFO UI
+		INNER JOIN POINT_INFO PI ON UI.UI_NUM = PI.UI_NUM
+		INNER JOIN USER_GRADE UG ON UI.UG_NUM = UG.UG_NUM
+		<where>
+			<if test='uiName != null and uiName !=""'>
+				AND UI.UI_NAME LIKE CONCAT('%', #{uiName}, '%')
+			</if>
+			<if test='uiId != null and uiId !=""'>
+				AND UI.UI_ID = #{uiId}
+			</if>
+			<if test='ugNum != null'>
+				AND UG.UG_NUM = #{ugNum}
+			</if>
+		</where>
+
+	</select>
+	<select id="selectUserInfo"
+		resultType="com.test.shop.vo.UserInfoVO">
+		SELECT UI.UI_NUM, UI.UI_NAME, UI.UI_ID, UI.UI_PROFILE_IMG, UI.UG_NUM,
+		UG.UG_NAME, UG.UG_DESC,
+		UI.CREDAT, UI.CRETIM, UI.LMODAT, UI.LMOTIM
+		FROM USER_INFO UI
+		INNER JOIN POINT_INFO PI ON UI.UI_NUM = PI.UI_NUM
+		INNER JOIN USER_GRADE UG ON UI.UG_NUM = UG.UG_NUM
+		WHERE ug.ug_num = #{ugNum}
+	</select>
+
+	<insert id="insertUserInfo"
+		parameterType="com.test.shop.vo.UserInfoVO" useGeneratedKeys="true"
+		keyProperty="uiNum" keyColumn="UI_NUM">
+		insert into
+		USER_INFO(UI_NAME,UI_ID,UI_PWD,UI_PROFILE_IMG,UG_NUM)
+		VALUES(#{uiName},#{uiId},#{uiPwd},#{uiProfileImg},#{ugNum})
+	</insert>
+	<update id="updateUserInfo"
+		parameterType="com.test.shop.vo.UserInfoVO">
+		update USER_INFO
+		set UI_NAME = #{uiName},
+		UI_ID = #{uiId},
+		UI_PWD = #{uiPwd},
+		UI_PROFILE_IMG
+		= #{uiProfileImg}
+		WHERE UI_NUM =
+		#{uiNum}
+	</update>
+	<delete id="deleteUserInfo">
+		delete from USER_INFO WHERE UI_NUM = #{uiNum}
+	</delete>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.shop.mapper.UserGradeMapper">
+	<select id="selectUserGradeList" resultType="com.test.shop.vo.UserGradeVO">
+		SELECT * FROM USER_GRADE
+	</select>
+	<select id="selectUserGrade" resultType="com.test.shop.vo.UserGradeVO">
+		SELECT * FROM USER_GRADE
+		WHERE UG_NUM = #{ugNum}
+	</select>
+
+	<insert id="insertUserGrade">
+		INSERT INTO USER_GRADE (UG_NAME, UG_DESC)
+		VALUES (#{ugName}, #{ugDesc})
+	</insert>
+
+	<update id="updateUserGrade">
+		UPDATE USER_GRADE
+		SET UG_NAME = #{ugName},
+		UG_DESC = #{ugDesc}
+		WHERE UG_NUM = #{ugNum}
+	</update>
+
+	<delete id="deleteUserGrade">
+		DELETE FROM USER_GRADE
+		WHERE UG_NUM = #{ugNum}
+	</delete>
+</mapper>
