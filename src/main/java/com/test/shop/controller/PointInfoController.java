@@ -9,46 +9,39 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.test.shop.service.PointInfoService;
 import com.test.shop.vo.PointInfoVO;
 
 @RestController
-@RequestMapping("/point")
 public class PointInfoController {
 
-    @Autowired
-    private PointInfoService pointInfoService;
+	@Autowired
+	private PointInfoService piService;
 
-    // 전체 포인트 목록 조회
-    @GetMapping("/list")
-    public List<PointInfoVO> getPointInfoList() {
-        return pointInfoService.selectPointInfoList();
-    }
-
-    // 포인트 1건 조회
-    @GetMapping("/{piNum}")
-    public PointInfoVO getPointInfo(@PathVariable int piNum) {
-        return pointInfoService.selectPointInfo(piNum);
-    }
-
-    // 포인트 등록
-    @PostMapping("/add")
-    public int addPointInfo(@RequestBody PointInfoVO pointInfoVO) {
-        return pointInfoService.insertPointInfo(pointInfoVO);
-    }
-
-    // 포인트 수정
-    @PutMapping("/update")
-    public int updatePointInfo(@RequestBody PointInfoVO pointInfoVO) {
-        return pointInfoService.updatePointInfo(pointInfoVO);
-    }
-
-    // 포인트 삭제
-    @DeleteMapping("/delete/{piNum}")
-    public int deletePointInfo(@PathVariable int piNum) {
-        return pointInfoService.deletePointInfo(piNum);
-    }
+	@GetMapping("/point")
+	public List<PointInfoVO> getPointList(PointInfoVO point){
+		return piService.selectPointInfoList(point);
+	}
+	
+	@GetMapping("/point/{piNum}")
+	public PointInfoVO getPoint(@PathVariable("uiNum")int piNum) {
+		return piService.selectPointInfo(piNum);
+	}
+	
+	@PostMapping("/point")
+	public int addPoint(@RequestBody PointInfoVO point) {
+		return piService.insertPointInfo(point);
+	}
+	
+	@PutMapping("/point")
+	public int modifyPoint(@RequestBody PointInfoVO point) {
+		return piService.updatePointInfo(point);
+	}
+	
+	@DeleteMapping("/point/{piNum}")
+	public int removePoint(@PathVariable("uiNum")int piNum) {
+		return piService.deletePointInfo(piNum);
+	}
 }

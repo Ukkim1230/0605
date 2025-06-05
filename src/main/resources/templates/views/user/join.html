@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://thymeleaf.org">
 <head th:replace="~{fragments/head::head}"></head>
 <body>
-	<section id="register" style="background: url('/images/background-img.png') no-repeat;">
-		<div class="container">
+	<section id="register"
+		style="background: url('images/background-img.png') no-repeat;">
+		<div class="container ">
 			<div class="row my-5 py-5">
-				<div class="offset-md-3 col-md-6 my-5">
+				<div class="offset-md-3 col-md-6 my-5 ">
 					<h2 class="display-3 fw-normal text-center">
 						회원가입 <span class="text-primary"></span>
 					</h2>
-					<form method="post" enctype="multipart/form-data" th:action="@{/user}">
+					<form method="POST" enctype="multipart/form-data" th:action="@{/user}">
 						<div class="mb-3">
 							<input type="text" class="form-control form-control-lg"
 								name="uiName" id="uiName" placeholder="이름을 입력하세요" required maxlength="50">
@@ -26,31 +27,36 @@
 						</div>
 						<div class="mb-3">
 							<input type="password" class="form-control form-control-lg"
-								id="userPwdConfirm" placeholder="비밀번호를 다시 입력하세요" required>
+								name="userPwdConfirm"id="userPwdConfirm" placeholder="비밀번호를 다시 입력하세요" required>
 						</div>
 						
 						<div class="mb-3">
 							<label for="uiProfile" class="form-label">프로필 이미지</label>
-							<div class="d-flex gap-3 align-items-center">
-								<div class="position-relative" style="width: 100px; height: 100px;">
-									<img id="preview" src="/images/default-profile.jpg" class="img-fluid rounded-circle"
+							<div class="d-flex gap-3 align-item-center">
+								<div class="position-relative"
+									style="width: 100px; height: 100px">
+									<img id="preview" src="/image/default-profile.jpg"
+										class="img-flude rounded-circle"
 										style="width: 100px; height: 100px; object-fit: cover;">
 									<div class="position-absolute bottom-0 end-0">
-										<label for="uiProfile" class="btn btn-sm btn-primary rounded-circle"
-											style="width: 32px; height: 32px; padding: 0; line-height: 32px;">
+										<label for="uiProfile"
+											class="btn btn-sm btn-primary rounded-circle"
+											style="width: 32px; height: 32px; padding: 0; line-height: 32px">
 											<i class="fad fa-camera"></i>
 										</label>
 									</div>
-								</div>
-								<div class="flex-grow-1">
-									<input type="file" class="form-control" name="uiProfile" id="uiProfile"
-										accept="image/*" style="display:none;" required onchange="changeImg()">
-									<div class="form-text">권장크기:200X200px (최대 5MB)</div>
+									<div class="flex-frow-1">
+										<input type="file" class="form-control" name="uiProfile"
+											id="uiProfile" accept="image/*" style="display: none;"
+											onchange="changeImg()" required>
+										<div class="form-text">권장크기 : 200x200px (최대 5MB)</div>
+									</div>
 								</div>
 							</div>
 						</div>
-							<div class="mb-3">
-							<select class="form-select form-select-lg" name="email"
+
+						<div class="mb-3">
+						<select class="form-select form-select-lg" name="ugNum"
 								id="userType">
 								<option selected disabled>Select User Type</option>
 								<option value="1">일반</option>
@@ -66,19 +72,20 @@
 			</div>
 		</div>
 	</section>
-
 	<script>
 		function changeImg(){
 			const [file] = document.querySelector('#uiProfile').files;
 			if(file && file.size){
 				if(file.size > (5*1024*1024)){
-					alert('이미지파일은 5MB를 넘을 수 없습니다.');
-					document.querySelector('#uiProfile').value = '';
+					alert('이미지 파일은 5MB를 넘을 수 없습니다.');
+					document.querySelector('#uiProfile').value='';
 					return;
 				}
-				document.querySelector('#preview').src = URL.createObjectURL(file);
+				document.querySelector('#preview').src= URL.createObjectURL(file);
 			}
 		}
+		
+	
 	</script>
 </body>
 </html>

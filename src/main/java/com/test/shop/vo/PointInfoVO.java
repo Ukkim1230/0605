@@ -9,12 +9,13 @@ import lombok.ToString;
 @ToString
 public class PointInfoVO {
 
-	private int piNum;      
-    private int piPoint;
-    private int uiNum;
-    private String ptType;  
-    private String credat;  
-    private String cretim;  
-    private String lmodat;  
-    private String lmotim; 
+	private Integer piNum;
+	private String ptType;
+	private String ptName;
+	private Integer ptPoint;
+	private Integer uiNum;
+	private String credat;
+	private String cretim;
+	private String lmodat;
+	private String lmotim;
 }

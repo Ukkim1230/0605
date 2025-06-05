@@ -9,19 +9,19 @@
 		WHERE UG_NUM = #{ugNum}
 	</select>
 
-	<insert id="insertUserGrade">
+	<insert id="insertUserGrade" parameterType="com.test.shop.vo.UserGradeVO">
 		INSERT INTO USER_GRADE (UG_NAME, UG_DESC)
 		VALUES (#{ugName}, #{ugDesc})
 	</insert>
 
-	<update id="updateUserGrade">
+	<update id="updateUserGrade" parameterType="com.test.shop.vo.UserGradeVO">
 		UPDATE USER_GRADE
 		SET UG_NAME = #{ugName},
 		UG_DESC = #{ugDesc}
 		WHERE UG_NUM = #{ugNum}
 	</update>
 
-	<delete id="deleteUserGrade">
+	<delete id="deleteUserGrade" parameterType="com.test.shop.vo.UserGradeVO">
 		DELETE FROM USER_GRADE
 		WHERE UG_NUM = #{ugNum}
 	</delete>

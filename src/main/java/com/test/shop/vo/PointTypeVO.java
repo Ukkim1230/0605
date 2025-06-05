@@ -12,11 +12,4 @@ public class PointTypeVO {
 	private String ptType;
 	private String ptName;
 	private int ptPoint;
-	private Integer piNum;
-	
-	private Integer uiNum;
-	private String credat;
-	private String cretim;
-	private String lmodat;
-	private String lmotim;
 }

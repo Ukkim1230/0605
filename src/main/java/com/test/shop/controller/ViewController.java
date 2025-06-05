@@ -10,6 +10,7 @@ public class ViewController {
 	public String home() {
 		return "index";
 	}
+	
 	@GetMapping("/views/**")
 	public void goPage() {
 		

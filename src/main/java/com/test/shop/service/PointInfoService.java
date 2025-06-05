@@ -14,25 +14,18 @@ public class PointInfoService {
     @Autowired
     private PointInfoMapper pointInfoMapper;
 
-    public List<PointInfoVO> selectPointInfoList() {
-        return pointInfoMapper.selectPointInfoList();
+    public List<PointInfoVO> selectPointInfoList(PointInfoVO pointInfoVO) {
+        return pointInfoMapper.selectPointInfoList(pointInfoVO);
     }
-
     public PointInfoVO selectPointInfo(int piNum) {
         return pointInfoMapper.selectPointInfo(piNum);
     }
-
-    // 포인트 등록
     public int insertPointInfo(PointInfoVO pointInfoVO) {
         return pointInfoMapper.insertPointInfo(pointInfoVO);
     }
-
-    // 포인트 수정
     public int updatePointInfo(PointInfoVO pointInfoVO) {
         return pointInfoMapper.updatePointInfo(pointInfoVO);
     }
-
-    // 포인트 삭제
     public int deletePointInfo(int piNum) {
         return pointInfoMapper.deletePointInfo(piNum);
     }

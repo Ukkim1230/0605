@@ -5,7 +5,8 @@ import java.util.List;
 import com.test.shop.vo.PointInfoVO;
 
 public interface PointInfoMapper {
-	public List<PointInfoVO> selectPointInfoList();
+	
+	public List<PointInfoVO> selectPointInfoList(PointInfoVO pointInfoVO);
 	public PointInfoVO selectPointInfo(int piNum);
     public int insertPointInfo(PointInfoVO pointInfoVO);
     public int updatePointInfo(PointInfoVO pointInfoVO);
