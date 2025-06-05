@@ -31,7 +31,7 @@
 		FROM USER_INFO UI
 		INNER JOIN POINT_INFO PI ON UI.UI_NUM = PI.UI_NUM
 		INNER JOIN USER_GRADE UG ON UI.UG_NUM = UG.UG_NUM
-		WHERE ug.ug_num = #{ugNum}
+		WHERE ug_num = #{ugNum}
 	</select>
 
 	<insert id="insertUserInfo"

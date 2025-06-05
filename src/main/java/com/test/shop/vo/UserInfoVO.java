@@ -21,7 +21,7 @@ public class UserInfoVO {
 	
 	private String uiProfileImg;
 	private MultipartFile uiProfile;
-	private int ugNum;
+	private Integer ugNum;
 	private String ugName;
 	private String ugDesc;
 	private int piPoint;

@@ -9,7 +9,7 @@
 					<h2 class="display-3 fw-normal text-center">
 						회원가입 <span class="text-primary"></span>
 					</h2>
-					<form method="post" enctype="multipart/form-data" th:action="@{/user-info}">
+					<form method="post" enctype="multipart/form-data" th:action="@{/user}">
 						<div class="mb-3">
 							<input type="text" class="form-control form-control-lg"
 								name="uiName" id="uiName" placeholder="이름을 입력하세요" required maxlength="50">
@@ -21,7 +21,7 @@
 						</div>
 						<div class="mb-3">
 							<input type="password" class="form-control form-control-lg"
-								name="uiPwd" id=""uiPwd"" placeholder="비밀번호를 입력하세요" required>
+								name="uiPwd" id="uiPwd" placeholder="비밀번호를 입력하세요" required>
 							<div class="form-text">비밀번호는 최소 8자 이상이어야 합니다.</div>
 						</div>
 						<div class="mb-3">
@@ -53,9 +53,9 @@
 							<select class="form-select form-select-lg" name="email"
 								id="userType">
 								<option selected disabled>Select User Type</option>
-								<option vlaue="1">일반</option>
-								<option vlaue="2">판매자</option>
-								<option vlaue="3">관리자</option>
+								<option value="1">일반</option>
+								<option value="2">판매자</option>
+								<option value="3">관리자</option>
 							</select>
 							</div>
 						<div class="d-grid gap-2">
