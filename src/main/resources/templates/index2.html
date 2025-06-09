@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head th:replace="~{fragments/head::head}"></head>
+<head th:replace="~{fragments/head2::head2}"></head>
 
 <body>
 
-  <svg th:replace="~{fragments/svgs::svgs}"></svg>
-
-  <nav th:replace="~{fragments/nav::nav}"></nav>
-
+	<svg th:replace="~{fragments/svgs2::svgs2}"></svg>
+	
+  	<nav th:replace="~{fragments/nav2::nav2}"></nav>
+  	
   <section id="banner" style="background: #F9F3EC;">
-    <div class="container">
+    <th:block class="container">
       <div class="swiper main-swiper">
         <div class="swiper-wrapper">
 
@@ -1246,7 +1246,7 @@
     </div>
   </section>
 
- 	<div th:replace="~{fragments/footer::footer}"></div>
+  <div th:replace="~{fragments/footer2::footer2}"></div>
 </body>
-
+</th:block>
 </html>

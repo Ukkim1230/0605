@@ -3,6 +3,7 @@ package com.test.shop.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -16,32 +17,48 @@ import org.springframework.web.bind.annotation.RestController;
 import com.test.shop.service.UserInfoService;
 import com.test.shop.vo.UserInfoVO;
 
+import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
+
 @RestController
+@RequestMapping("/user-infos")
+@RequiredArgsConstructor
 public class UserInfoController {
 
     @Autowired
     private UserInfoService userInfoService;
 
-    @GetMapping("/user")
+    @GetMapping
     public List<UserInfoVO> getUserList(UserInfoVO user) {
         return userInfoService.selectUserInfoList(user);
     }
-    @GetMapping("/user/{uiNum}")
+    @GetMapping("/{uiNum}")
     public UserInfoVO getUser(@PathVariable("uiNum") int uiNum) {
         return userInfoService.selectUserInfo(uiNum);
     }
-
-    @PostMapping("/user")
+    
+    @GetMapping("/id/{uiId}")
+    public ResponseEntity<UserInfoVO> getUserInfoById(@PathVariable String uiId) {
+        return ResponseEntity.ok(userInfoService.selectUserInfoById(uiId));
+    }
+    
+    @PostMapping("/login")
+    public UserInfoVO login(@RequestBody UserInfoVO userInfo, HttpSession session) {
+    	
+    	return userInfoService.login(userInfo, session);
+    }
+    
+    @PostMapping
     public int addUser(@ModelAttribute UserInfoVO userInfoVO) {
         return userInfoService.insertUserInfo(userInfoVO);
     }
 
-    @PutMapping("/user")
+    @PutMapping("/{uiNum}")
     public int updateUser(@RequestBody UserInfoVO userInfoVO) {
         return userInfoService.updateUserInfo(userInfoVO);
     }
 
-    @DeleteMapping("/user/{uiNum}")
+    @DeleteMapping("/{uiNum}")
     public int deleteUser(@PathVariable int uiNum) {
         return userInfoService.deleteUserInfo(uiNum);
     }

@@ -38,15 +38,18 @@
 	</select>
 	<select id="selectUserInfoById"
 		resultType="com.test.shop.vo.UserInfoVO">
-		select UI.UI_NUM, UI_NAME, UI_ID, UI_PROFILE_IMG, UI.UG_NUM,
-				PI.PI_POINT, UG.UG_NAME, UG.UG_DESC,
-				CREDAT, CRETIM, LMODAT, LMOTIM 
-		from USER_INFO UI
-		INNER JOIN POINT_INFO PI
-		ON UI.UI_NUM = PI.UI_NUM
-		INNER JOIN USER_GRADE UG
-		ON UI.UG_NUM = UG.UG_NUM
-		WHERE UI.UI_ID = #{uiId}
+		SELECT UI.UI_NUM, UI_NAME, UI_ID, UI_PROFILE_IMG, 
+              UI.UG_NUM, PT.PT_POINT, UG.UG_NAME, UG.UG_DESC,
+              UI_PWD, UI.CREDAT, UI.CRETIM, UI.LMODAT, 
+              UI.LMOTIM
+        FROM USER_INFO UI
+        INNER JOIN POINT_INFO PI
+        ON UI.UI_NUM = PI.UI_NUM
+        inner join POINT_TYPE PT
+        on PI.PT_TYPE = PT.PT_TYPE
+        INNER JOIN USER_GRADE UG
+        ON UI.UG_NUM = UG.UG_NUM
+        WHERE UI_ID = #{uiId};
 	</select>
 	<insert id="insertUserInfo"
 		parameterType="com.test.shop.vo.UserInfoVO" useGeneratedKeys="true"

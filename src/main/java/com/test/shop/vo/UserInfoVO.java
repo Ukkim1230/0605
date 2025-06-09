@@ -24,7 +24,7 @@ public class UserInfoVO {
 	private Integer ugNum;
 	private String ugName;
 	private String ugDesc;
-	private int piPoint;
+	private int ptPoint;
 	private String credat;
 	private String cretim;
 	private String lmodat;
