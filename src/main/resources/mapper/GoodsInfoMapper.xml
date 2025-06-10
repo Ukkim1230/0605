@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.shop.mapper.GoodsInfoMapper">
+	<select id="selectGoodsInfoList"
+		resultType="com.test.shop.vo.GoodsInfoVO">
+		select * from GOODS_INFO
+	</select>
+	<select id="selectGoodsInfo"
+		resultType="com.test.shop.vo.GoodsInfoVO">
+		select * from GOODS_INFO
+		where GI_NUM = #{giNum}
+	</select>
+	<insert id="insertGoodsInfo">
+		insert into GOODS_INFO(GI_NAME, GI_DESC, GI_PRICE,
+		GI_MAIN_IMG,GI_SUB_IMG1,GI_SUB_IMG2,GI_SUB_IMG3,GI_SUB_IMG4,GI_SUB_IMG5)
+		values (#{giName}, #{giDesc}, #{giPrice},
+		#{giMainImg}, #{giSubImg1}, #{giSubImg2}, #{giSubImg3}, #{giSubImg4}, #{giSubImg5})
+	</insert>
+	<update id="updateGoodsInfo">
+		UPDATE GOODS_INFO
+		SET
+		GI_NAME = #{giName},
+		GI_DESC = #{giDesc},
+		GI_PRICE = #{giPrice},
+		GI_MAIN_IMG = #{giMainImg},
+		GI_SUB_IMG1 = #{giSubImg1},
+		GI_SUB_IMG2 = #{giSubImg2},
+		GI_SUB_IMG3 = #{giSubImg3},
+		GI_SUB_IMG4 = #{giSubImg4},
+		GI_SUB_IMG5 = #{giSubImg5}
+		WHERE GI_NUM = #{giNum}
+	</update>
+	<delete id="deleteGoodsInfo">
+	delete from GOODS_INFO where GI_NUM = #{giNum}
+	</delete>
+</mapper>

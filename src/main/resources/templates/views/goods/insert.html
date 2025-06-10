@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/layout/layout}">
+<head>
+	<title>Pet Shop - Add Product</title>
+</head>
+<body>
+	<th:block layout:fragment="content">
+		<section id="register" style="background: #F9F3EC;">
+		    <div class="container">
+		        <div class="row my-5 py-5">
+		            <div class="offset-md-3 col-md-6 my-5">
+		                <h2 class="display-3 fw-normal text-center mb-4">상품 등록</h2>
+		                <form method="post" enctype="multipart/form-data" th:action="@{/goods-infos}" onsubmit="addProduct(event)">
+		                    <div class="mb-3">
+		                        <input type="text" class="form-control form-control-lg" name="giName" id="giName"
+		                            placeholder="상품명을 입력하세요" required maxlength="100">
+		                    </div>
+		                    <div class="mb-3">
+		                        <textarea class="form-control form-control-lg" name="giDesc" id="giDesc" 
+		                            placeholder="상품 설명을 입력하세요" rows="4" required></textarea>
+		                    </div>
+		                    <div class="mb-3">
+		                        <input type="number" class="form-control form-control-lg" name="giPrice" id="giPrice"
+		                            placeholder="가격을 입력하세요" required>
+		                    </div>
+		                    <div class="mb-3">
+		                        <input type="number" class="form-control form-control-lg" name="giQuantity" id="giQuantity"
+		                            placeholder="수량을 입력하세요" required>
+		                    </div>
+		                    <div class="mb-3">
+		                        <label for="giMainImg" class="form-label">메인 이미지</label>
+		                        <div class="d-flex gap-3 align-items-center mb-2">
+		                            <div class="position-relative" style="width: 150px; height: 150px;">
+		                                <img id="mainPreview" src="/images/no-image.jpg" class="img-fluid rounded" 
+		                                    style="width: 150px; height: 150px; object-fit: cover;">
+		                            </div>
+		                            <div class="flex-grow-1">
+		                                <input type="file" class="form-control" name="giMainImg" id="giMainImg" 
+		                                    accept="image/*" required onchange="changeImg(this)">
+		                                <div class="form-text">(최대 5MB)</div>
+		                            </div>
+		                        </div>
+		                    </div>
+		                    <div class="mb-4">
+		                        <label for="giSubImg" class="form-label">서브 이미지들 (최대 5개)</label>
+		                        <div id="subImgContainer" class="d-flex gap-2 mb-2 flex-wrap">
+		                            
+		                        </div>
+		                        <input type="file" class="form-control" name="giSubImg" id="giSubImg" 
+		                            accept="image/*" multiple onchange="changeImgs(this)">
+		                        <div class="form-text">(각 최대 5MB)</div>
+		                    </div>
+		                    <div class="d-grid gap-2">
+		                        <button type="submit" class="btn btn-dark btn-lg rounded-1">상품 등록</button>
+		                    </div>
+		                </form>
+		            </div>
+		        </div>
+		    </div>
+		</section>
+		
+		<script>
+		function addProduct(evt){
+			evt.preventDefault();
+			const formData = new FormData();
+			formData.append('giName', $('#giName').val());
+			formData.append('giDesc', $('#giDesc').val());
+			formData.append('giPrice', $('#giPrice').val());
+			formData.append('giQuantity', $('#giQuantity').val());
+			formData.append('giMain', $('#giMainImg')[0].files[0]);
+			const files = Array.from($('#giSubImg')[0].files);
+			files.forEach(file=>{
+				formData.append('giSubList', file);
+			})
+			$.ajax({
+				url:'/goods-infos2',
+				method:'POST',
+				data:formData,
+				contentType:false,
+				processData:false,
+				success : function(res){
+					alert('상품등록이 성공하였습니다.');
+				},
+				error : function(err){
+					alert('상품등록 중 에러가 발생하였습니다.');
+				}
+			})
+		}
+		function changeImg(obj) {
+		    if (obj.files && obj.files[0]) {
+		        const reader = new FileReader();
+		        
+		        document.getElementById('mainPreview').src  = URL.createObjectURL(obj.files[0]);
+		    }
+		}
+		
+		function changeImgs(obj) {
+		    const container = document.getElementById('subImgContainer');
+		    container.innerHTML = '';
+		    
+		    if (obj.files && obj.files.length > 0) {
+		        const files = Array.from(obj.files).slice(0, 5); // 최대 5개까지만
+		        files.forEach(file => {
+					let html = '';
+					html += '<div class="position-relative" style="width: 150px; height: 150px;">';
+					html += '<img src="' + URL.createObjectURL(file) + '" class="img-fluid rounded" style="width: 150px; height: 150px; object-fit: cover;">';
+					html += '</div>';
+					container.innerHTML += html;
+		        });
+		    }
+		}
+		</script>
+	</th:block>
+</body>
+</html>

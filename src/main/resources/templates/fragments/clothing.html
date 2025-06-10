@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<section id="clothing" class="my-5 overflow-hidden"
+		th:fragment="clothing">
+		<div class="container pb-5">
+
+			<div
+				class="section-header d-md-flex justify-content-between align-items-center mb-3">
+				<h2 class="display-3 fw-normal">Pet Clothing</h2>
+				<div>
+					<a href="#"
+						class="btn btn-outline-dark btn-lg text-uppercase fs-6 rounded-1">
+						shop now <svg width="24" height="24" viewBox="0 0 24 24"
+							class="mb-1">
+              <use xlink:href="#arrow-right"></use>
+            </svg>
+					</a>
+				</div>
+			</div>
+
+			<div class="products-carousel swiper">
+				<div class="swiper-wrapper" id="goodsInfos">
+				</div>
+			</div>
+			<!-- / products-carousel -->
+
+
+		</div>
+
+		<script th:inline="javascript">
+  	const rootPath = /*[[@{/}]]*/ '';
+  	window.addEventListener('load',function(){
+  		$.ajax({
+  			url : '/goods-infos',
+  			method : 'GET',
+  			success : function(res){
+  				console.log(res);
+  				const goodsInfos = res;
+  				let html = '';
+  				for(const goodsInfo of goodsInfos){
+  				html += "<div class=\"swiper-slide\">\r\n"
+  					+ "  		<div class=\"z-1 position-absolute rounded-3 m-3 px-3 border border-dark-subtle\">\r\n"
+  					+ "  		New\r\n"
+  					+ "  		</div>\r\n"
+  					+ "  		<div class=\"card position-relative\">\r\n"
+  					+ "  		<a href=\"single-product.html\"><img src=\"" +rootPath + "files/" + goodsInfo.giMainImg + "\" class=\"img-fluid rounded-4\" alt=\"image\"></a>\r\n"
+  					+ "  		<div class=\"card-body p-0\">\r\n"
+  					+ "  		  <a href=\"single-product.html\">\r\n"
+  					+ "  		    <h3 class=\"card-title pt-4 m-0\">"+ goodsInfo.giName+"</h3>\r\n"
+  					+ "  		  </a>\r\n"
+  					+ "\r\n"
+  					+ "  		  <div class=\"card-text\">\r\n"
+  					+ "  		    <span class=\"rating secondary-font\">\r\n"
+  					+ "  		      <iconify-icon icon=\"clarity:star-solid\" class=\"text-primary\"></iconify-icon>\r\n"
+  					+ "  		      <iconify-icon icon=\"clarity:star-solid\" class=\"text-primary\"></iconify-icon>\r\n"
+  					+ "  		      <iconify-icon icon=\"clarity:star-solid\" class=\"text-primary\"></iconify-icon>\r\n"
+  					+ "  		      <iconify-icon icon=\"clarity:star-solid\" class=\"text-primary\"></iconify-icon>\r\n"
+  					+ "  		      <iconify-icon icon=\"clarity:star-solid\" class=\"text-primary\"></iconify-icon>\r\n"
+  					+ "  		      5.0</span>\r\n"
+  					+ "\r\n"
+  					+ "  		    <h3 class=\"secondary-font text-primary\">"+goodsInfo.giPrice +"원</h3>\r\n"
+  					+ "\r\n"
+  					+ "  		    <div class=\"d-flex flex-wrap mt-3\">\r\n"
+  					+ "  		      <a href=\"#\" class=\"btn-cart me-3 px-4 pt-3 pb-3\">\r\n"
+  					+ "  		        <h5 class=\"text-uppercase m-0\">Add to Cart</h5>\r\n"
+  					+ "  		      </a>\r\n"
+  					+ "  		      <a href=\"#\" class=\"btn-wishlist px-4 pt-3 \">\r\n"
+  					+ "  		        <iconify-icon icon=\"fluent:heart-28-filled\" class=\"fs-5\"></iconify-icon>\r\n"
+  					+ "  		      </a>\r\n"
+  					+ "  		    </div>\r\n"
+  					+ "\r\n"
+  					+ "\r\n"
+  					+ "  		  </div>\r\n"
+  					+ "\r\n"
+  					+ "  		</div>\r\n"
+  					+ "  		</div>\r\n"
+  					+ "  		</div>"
+  		}
+  		$('#goodsInfos').html(html);
+  	}
+  	})
+  	})
+  	</script>
+	</section>
+</body>
+</html>
